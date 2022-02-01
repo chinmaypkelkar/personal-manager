@@ -1,0 +1,24 @@
+<ng-container *ngIf="expenseList">
+
+  <table mat-table [dataSource]="expenseList" class="mat-elevation-z8">
+    <ng-container matColumnDef="expense">
+      <th mat-header-cell *matHeaderCellDef> Expense </th>
+      <td mat-cell *matCellDef="let element"> {{element.expense}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef> Amount </th>
+      <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th mat-header-cell *matHeaderCellDef> CreatedDate </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+</ng-container>
+
+
