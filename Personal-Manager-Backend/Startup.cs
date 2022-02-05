@@ -31,8 +31,10 @@ namespace Personal_Manager_Backend
                 options.UseSqlServer(_configuration.GetConnectionString("PersonalManager")));
             services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ITodoListService, TodoListService>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITodoListRepository, TodoListRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

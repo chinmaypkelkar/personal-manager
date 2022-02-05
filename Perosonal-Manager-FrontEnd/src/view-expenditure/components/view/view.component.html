@@ -9,10 +9,10 @@
 </div>
   <div class="row mt-4">
     <div class="col-12 col-md-6">
-      <app-table class="mt-4" [expenseList]="expenses"></app-table>
+      <app-table class="mt-4" [limitedResultOfExpenseViewModel]="(limitedExpenseList$ | async)!" (pageChange)="onPageChange($event)"></app-table>
     </div>
     <div class="col-12 col-md-6">
-      <app-pie-chart [expenseList]="expenses"></app-pie-chart>
+      <app-pie-chart [expenseList]="(expenseList$ | async)!"></app-pie-chart>
     </div>
     <app-loader *ngIf="loading$ | async"></app-loader>
   </div>

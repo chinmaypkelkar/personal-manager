@@ -24,9 +24,18 @@ namespace Personal_Manager_Backend.Controllers
         }
         
         [HttpGet("[Controller]/[Action]")]
-        public Task<List<ExpenseViewModel>> GetExpenseList([FromQuery] int[] categoryIds, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        public async Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList([FromQuery] int[] categoryIds, [FromQuery] DateTime startDate, 
+            [FromQuery] DateTime endDate, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            return _expenseService.GetExpenseList(categoryIds, startDate, endDate);
+            var test = await _expenseService.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
+            return test;
+        }
+        
+        [HttpGet("[Controller]/[Action]")]
+        public Task<List<ExpenseViewModel>> GetFilteredExpenseList([FromQuery] int[] categoryIds, [FromQuery] DateTime startDate, 
+            [FromQuery] DateTime endDate)
+        {
+            return  _expenseService.GetFilteredExpenseList(categoryIds, startDate, endDate);
         }
     }
 }

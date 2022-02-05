@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {ExpenseList} from "../../Interfaces/expense-list";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {PageEvent} from "@angular/material/paginator/paginator";
+import {LimitedResultOfExpenseViewModel} from "../../Interfaces/limited-result-of-expense-viewmodel";
+import {LocalFilterParameters} from "../../Interfaces/local-filter-parameters";
 
 @Component({
   selector: 'app-table',
@@ -7,7 +9,11 @@ import {ExpenseList} from "../../Interfaces/expense-list";
   styleUrls: ['./table.component.css']
 })
 export class TableComponent{
-
-  @Input() expenseList!: ExpenseList[];
+  @Input() limitedResultOfExpenseViewModel!: LimitedResultOfExpenseViewModel;
+  @Output() pageChange: EventEmitter<LocalFilterParameters> = new EventEmitter<LocalFilterParameters>();
   columns: string[] = ['expense', 'amount', 'createdDate'];
+
+  onPageChange(page: PageEvent){
+    this.pageChange.emit({pageIndex: page.pageIndex, pageSize: page.pageSize})
+  }
 }

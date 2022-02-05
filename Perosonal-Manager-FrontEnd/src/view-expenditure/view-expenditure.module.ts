@@ -15,9 +15,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatTableModule} from "@angular/material/table";
-import {GoogleChartsModule} from "angular-google-charts";
-import {HighchartsChartModule} from "highcharts-angular";
 import {ChartModule} from "angular-highcharts";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -43,8 +42,8 @@ import {ChartModule} from "angular-highcharts";
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    ChartModule
-
+    ChartModule,
+    MatPaginatorModule
   ]
 })
 export class ViewExpenditureModule { }

@@ -29,17 +29,23 @@ namespace Personal_Manager_Backend.Services
             return await _expenseRepository.AddExpense(expense);
         }
 
-        public async Task<List<ExpenseViewModel>> GetExpenseList(int[] categoryIds, DateTime startDate,
-            DateTime endDate)
+        public async Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList(int[] categoryIds, DateTime startDate,
+            DateTime endDate, int pageIndex, int pageSize)
         {
-            return (await _expenseRepository.GetExpenseList(categoryIds, startDate, endDate))
-                .Select(x => new ExpenseViewModel
-                {
-                    Expense = x.Name,
-                    Category = x.Category.Name,
-                    Amount = x.Amount,
-                    CreatedDate = x.CreatedDate
-                }).ToList();
+            var test = await _expenseRepository.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
+            return test;
+        }
+
+        public async Task<List<ExpenseViewModel>> GetFilteredExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate)
+        {
+            var expenses =  await _expenseRepository.GetFilteredExpenseList(categoryIds, startDate, endDate);
+            return expenses.Select(x => new ExpenseViewModel
+            {
+                Expense = x.Name,
+                Category = x.Category.Name,
+                Amount = x.Amount,
+                CreatedDate = x.CreatedDate
+            }).ToList();
         }
     }
 }
