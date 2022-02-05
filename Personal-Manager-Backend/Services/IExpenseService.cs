@@ -9,6 +9,9 @@ namespace Personal_Manager_Backend.Services
     {
         public Task<int> AddExpense(ExpenseRequest request);
 
-        public Task<List<ExpenseViewModel>> GetExpenseList(int[] categoryId, DateTime startDate, DateTime endDate);
+        public Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList(int[] categoryId, DateTime startDate,
+            DateTime endDate, int pageIndex, int pageSize);
+
+        Task<List<ExpenseViewModel>> GetFilteredExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate);
     }
 }

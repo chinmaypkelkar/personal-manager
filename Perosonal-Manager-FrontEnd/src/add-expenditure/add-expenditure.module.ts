@@ -14,9 +14,10 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {SharedModule} from "../shared/shared.module";
 
 
+
 @NgModule({
   declarations: [
-    AddExpenseFormComponent
+    AddExpenseFormComponent,
   ],
   imports: [
     CommonModule,

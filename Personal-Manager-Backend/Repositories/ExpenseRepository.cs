@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Personal_Manager_Backend.DataModels;
+using Personal_Manager_Backend.ViewModels;
 
 namespace Personal_Manager_Backend.Repositories
 {
@@ -22,12 +23,40 @@ namespace Personal_Manager_Backend.Repositories
             return await _personalManagerContext.SaveChangesAsync();
         }
 
-        public async Task<List<Expense>> GetExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate)
+        public async Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate, int pageIndex, int pageSize)
         {
-            return await _personalManagerContext.Expenses
-                .Include(x=>x.Category)
-                .Where(x => categoryIds.Contains(x.CategoryId) && x.CreatedDate >= startDate && x.CreatedDate <= endDate)
+            var offset = pageIndex * pageSize;
+            var query = GetExpensesQuery(categoryIds, startDate, endDate);
+            var total = await query.CountAsync();
+            var expenses =  await query
+                .OrderBy(x=>x.Id)
+                .Skip(offset)
+                .Take(pageSize)
+                .Select(x=> new ExpenseViewModel
+                {
+                    Expense = x.Name,
+                    Category = x.Category.Name,
+                    Amount = x.Amount,
+                    CreatedDate = x.CreatedDate
+                })
                 .ToListAsync();
+
+            return new LimitedResultOfExpenseViewModel(expenses,total, pageIndex, pageSize);
+        }
+
+        public async Task<List<Expense>> GetFilteredExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate)
+        {
+            var query = GetExpensesQuery(categoryIds, startDate, endDate);
+            return await query.ToListAsync();
+        }
+
+        private IQueryable<Expense> GetExpensesQuery(int[] categoryIds, DateTime startDate,
+            DateTime endDate)
+        {
+            return _personalManagerContext.Expenses
+                .Include(x => x.Category)
+                .Where(x => categoryIds.Contains(x.CategoryId) && x.CreatedDate >= startDate &&
+                            x.CreatedDate <= endDate);
         }
     }
 }

@@ -25,7 +25,7 @@ export class FilterComponent implements OnInit {
   }
 
   submit(){
-    this.onSubmit.emit({categoryId:this.form.get('category')?.value,
+    this.onSubmit.emit({categoryIds:this.form.get('category')?.value,
     startDate: this.form.get('startDate')?.value,
       endDate: this.form.get('endDate')?.value
     })

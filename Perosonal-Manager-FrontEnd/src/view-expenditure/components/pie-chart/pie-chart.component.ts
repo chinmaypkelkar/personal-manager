@@ -13,9 +13,8 @@ export class PieChartComponent implements OnChanges {
   public chart!: Chart;
   private _chartData = [] as any;
 
-
-
   ngOnChanges(changes: SimpleChanges): void {
+    this._chartData = [];
     const extractedCategoryInformation = this.expenseList?.map((expense) => {
       let obj: { [category: string]: number} = {};
       obj[expense.category] = +expense.amount;
@@ -33,7 +32,6 @@ export class PieChartComponent implements OnChanges {
       }
     });
 
-
     for(let key in groupBy){
       let array = [key, groupBy[key]];
       this._chartData.push(array);
@@ -48,6 +46,9 @@ export class PieChartComponent implements OnChanges {
         type: 'pie',
         backgroundColor: 'transparent',
         height: 400,
+      },
+      title: {
+        text: 'Expenses by Category'
       },
       credits: {
         enabled: false,
