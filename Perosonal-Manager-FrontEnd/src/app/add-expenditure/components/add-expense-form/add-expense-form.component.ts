@@ -63,7 +63,7 @@ export class AddExpenseFormComponent implements OnInit {
          this._loadingService.setLoader(false);
          setTimeout(() => this.formGroupDirective.resetForm(), 200);
        }
-   } )
+   });
   }
 
 }
