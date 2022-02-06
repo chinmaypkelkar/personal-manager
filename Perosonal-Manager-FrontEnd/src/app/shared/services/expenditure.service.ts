@@ -18,7 +18,6 @@ export class ExpenditureService {
   globalFilterParameters$ = this.$globalFilterParameters.asObservable();
   localFilterParameters$ = this.$localFilterParameters.asObservable();
 
-
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }

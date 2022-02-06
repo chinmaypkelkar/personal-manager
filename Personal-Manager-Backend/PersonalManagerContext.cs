@@ -18,9 +18,15 @@ namespace Personal_Manager_Backend
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<TodoList> TodoLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TodoList>(entity =>
+            {
+                entity.ToTable("TodoList");
+                
+            });
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category");

@@ -17,6 +17,10 @@ export class AppComponent {
       {
         label : 'View Expenses',
         route : '/view-expense'
+      },
+      {
+        label : 'Add ToDo',
+        route : '/add-todo'
       }]
   }
 }
