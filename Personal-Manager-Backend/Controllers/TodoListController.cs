@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Personal_Manager_Backend.Services;
@@ -18,6 +20,12 @@ namespace Personal_Manager_Backend.Controllers
         public Task<int> AddTodoItem([FromBody] TodoRequest request)
         {
             return _todoListService.AddTodoItem(request);
+        }
+
+        [HttpGet("[Controller]/[Action]")]
+        public Task<List<string>> GetFilteredTodoList(DateTime createdDate)
+        {
+            return _todoListService.GetFilteredTodoList(createdDate);
         }
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Personal_Manager_Backend.DataModels;
 using Personal_Manager_Backend.Repositories;
@@ -22,7 +24,11 @@ namespace Personal_Manager_Backend.Services
             };
 
             return await _todoListRepository.AddTodoItem(todoRequest);
-            
+        }
+
+        public async Task<List<string>> GetFilteredTodoList(DateTime createdDate)
+        {
+            return await _todoListRepository.GetFilteredTodoList(createdDate);
         }
     }
 }

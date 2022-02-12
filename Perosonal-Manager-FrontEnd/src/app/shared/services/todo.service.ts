@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TodoRequest} from "../../add-todo/interfaces/todo-request";
 
@@ -13,7 +13,13 @@ export class TodoService {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
-  public add(request: TodoRequest): Observable<number>{
+  public addTodoItem(request: TodoRequest): Observable<number>{
     return this.http.post<number>(`${this.backendBaseUrl}/AddTodoItem`, request, {headers: this.headers})
+  }
+
+  public getFilteredTodoList(createDate: Date): Observable<string[]>{
+    let httpParams = new HttpParams()
+      .append('createdDate', createDate.toISOString())
+    return this.http.get<string[]>(`${this.backendBaseUrl}/GetFilteredTodoList`, {headers: this.headers, params: httpParams})
   }
 }

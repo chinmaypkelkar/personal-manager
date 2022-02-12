@@ -30,6 +30,9 @@
               <mat-error *ngIf="expenseForm.get('amount')?.hasError('required')">
                 Please select expense amount
               </mat-error>
+              <mat-error *ngIf="expenseForm.get('expense')?.hasError('pattern')">
+                Please enter only number
+              </mat-error>
             </mat-form-field>
           </div>
         </div>

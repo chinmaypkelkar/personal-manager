@@ -1,0 +1,18 @@
+<div class="container mt-4 page-header">
+  <h1>View ToDo</h1>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <app-todo-filter (onSubmit)="onSubmit($event)"></app-todo-filter>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <app-todo-list [toDoList]="(todoList$ | async)!"></app-todo-list>
+    </div>
+  </div>
+  <app-loader *ngIf="loading$ | async"></app-loader>
+</div>
+
+

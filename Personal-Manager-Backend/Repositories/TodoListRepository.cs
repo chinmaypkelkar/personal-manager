@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Personal_Manager_Backend.DataModels;
 
 namespace Personal_Manager_Backend.Repositories
@@ -15,6 +19,15 @@ namespace Personal_Manager_Backend.Repositories
         {
             _personalManagerContext.TodoLists.Add(todoRequest);
             return await _personalManagerContext.SaveChangesAsync();
+        }
+
+        public async Task<List<string>> GetFilteredTodoList(DateTime createdDate)
+        {
+            return await _personalManagerContext.TodoLists
+                .AsNoTracking()
+                .Where(x=> x.CreatedDate == createdDate.Date)
+                .Select(x => x.Name)
+                .ToListAsync();
         }
     }
 }
