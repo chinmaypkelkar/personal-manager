@@ -33,11 +33,6 @@ namespace Personal_Manager_Backend.Services
             {
                 throw new Exception($"{nameof(request.Name)} can't be null or empty");
             }
-            
-            if (request.CreatedDate == null)
-            {
-                throw new Exception($"{nameof(request.CreatedDate)} can't be null");
-            }
         }
 
         public async Task<List<string>> GetFilteredTodoList(DateTime createdDate)
