@@ -18,6 +18,7 @@ namespace Personal_Manager_Backend.Services
         }
         public async Task<int> AddExpense(ExpenseRequest request)
         {
+            Validate(request);
             var expense = new Expense
             {
                 CategoryId = request.CategoryId,
@@ -28,12 +29,24 @@ namespace Personal_Manager_Backend.Services
 
             return await _expenseRepository.AddExpense(expense);
         }
+        
+        private static void Validate(ExpenseRequest request)
+        {
+            if (request.CreatedDate == null)
+            {
+                throw new Exception($"{nameof(request.CreatedDate)} can't be null");
+            }
+            
+            if (string.IsNullOrEmpty(request.Expense))
+            {
+                throw new Exception($"{nameof(request.Expense)} can't be null or empty");
+            }
+        }
 
         public async Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList(int[] categoryIds, DateTime startDate,
             DateTime endDate, int pageIndex, int pageSize)
         {
-            var test = await _expenseRepository.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
-            return test;
+            return await _expenseRepository.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
         }
 
         public async Task<List<ExpenseViewModel>> GetFilteredExpenseList(int[] categoryIds, DateTime startDate, DateTime endDate)

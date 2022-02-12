@@ -17,6 +17,7 @@ namespace Personal_Manager_Backend.Services
         }
         public async Task<int> AddTodoItem(TodoRequest request)
         {
+            Validate(request);
             var todoRequest = new TodoList
             {
                 Name = request.Name,
@@ -24,6 +25,19 @@ namespace Personal_Manager_Backend.Services
             };
 
             return await _todoListRepository.AddTodoItem(todoRequest);
+        }
+
+        private static void Validate(TodoRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Name))
+            {
+                throw new Exception($"{nameof(request.Name)} can't be null or empty");
+            }
+            
+            if (request.CreatedDate == null)
+            {
+                throw new Exception($"{nameof(request.CreatedDate)} can't be null");
+            }
         }
 
         public async Task<List<string>> GetFilteredTodoList(DateTime createdDate)
