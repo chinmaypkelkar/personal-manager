@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ExpenditureService} from "../../../shared/services/expenditure.service";
 import {CategoryService} from "../../../shared/services/category.service";
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
-import {catchError, Observable, of} from "rxjs";
+import {catchError, Observable, of, tap} from "rxjs";
 import {Category} from "../../interfaces/category";
 import {ExpenseRequest} from "../../interfaces/expense-request";
 import {LoadingService} from "../../../shared/services/loading.service";
@@ -31,11 +31,12 @@ export class AddExpenseFormComponent implements OnInit {
     this.categories$ = this._categoryService.getCategories();
   }
 
+
   initForm(){
   this.expenseForm = this._formBuilder.group({
     category: [null, Validators.required],
     expense: ['', Validators.required],
-    amount: [null, Validators.required],
+    amount: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
     createdDate: [null, Validators.required]
   })
   }
@@ -50,12 +51,11 @@ export class AddExpenseFormComponent implements OnInit {
     this._loadingService.setLoader(true);
    this._expenditureService.add(expenseRequest)
      .pipe(
-       catchError(() => {
+       catchError((e) => {
          this._toastService.open('Error in sending request');
          this._loadingService.setLoader(false);
          setTimeout(() => this.formGroupDirective.resetForm(), 200);
-         return of(null);
-
+         throw e;
        })
      ).subscribe((value) => {
        if(value){

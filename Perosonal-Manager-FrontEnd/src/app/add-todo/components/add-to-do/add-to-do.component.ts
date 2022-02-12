@@ -1,12 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {catchError, Observable, of} from "rxjs";
-import {Category} from "../../../add-expenditure/interfaces/category";
-import {ExpenditureService} from "../../../shared/services/expenditure.service";
-import {CategoryService} from "../../../shared/services/category.service";
 import {LoadingService} from "../../../shared/services/loading.service";
 import {ToastService} from "../../../shared/services/toast.service";
-import {ExpenseRequest} from "../../../add-expenditure/interfaces/expense-request";
 import {TodoService} from "../../../shared/services/todo.service";
 import {TodoRequest} from "../../interfaces/todo-request";
 
@@ -43,7 +39,7 @@ export class AddToDoComponent implements OnInit {
       createdDate: this.toDoForm.get('createdDate')?.value
     }
 
-    this._todoService.add(toDoRequest)
+    this._todoService.addTodoItem(toDoRequest)
       .pipe(
         catchError((err) => {
           this._toastService.open('Error in sending request');

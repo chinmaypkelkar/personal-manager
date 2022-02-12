@@ -21,6 +21,10 @@ export class AppComponent {
       {
         label : 'Add ToDo',
         route : '/add-todo'
+      },
+      {
+        label : 'View ToDo',
+        route : '/view-todo'
       }]
   }
 }

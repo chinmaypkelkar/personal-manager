@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'add-todo',
     loadChildren: () => import('./add-todo/add-to-do.module').then(m=>m.AddToDoModule)
+  },
+  {
+    path: 'view-todo',
+    loadChildren: () => import('./view-todo-list/view-todo-list.module').then(m=>m.ViewTodoListModule)
   }
 ]
 
