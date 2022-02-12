@@ -17,13 +17,12 @@ namespace Personal_Manager_Backend.Services
         
         public async Task<List<CategoryViewModel>> GetAllCategories()
         {
-            var categoriesDTO = await _categoryRepository.GetAllCategories();
-            return categoriesDTO.Select(x => new CategoryViewModel
+            var categoriesDto = await _categoryRepository.GetAllCategories();
+            return categoriesDto.Select(x => new CategoryViewModel
             {
                 Id = x.Id,
                 Name = x.Name
             }).ToList();
-            
         }
     }
 }

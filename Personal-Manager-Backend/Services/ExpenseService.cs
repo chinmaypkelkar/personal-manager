@@ -32,11 +32,6 @@ namespace Personal_Manager_Backend.Services
         
         private static void Validate(ExpenseRequest request)
         {
-            if (request.CreatedDate == null)
-            {
-                throw new Exception($"{nameof(request.CreatedDate)} can't be null");
-            }
-            
             if (string.IsNullOrEmpty(request.Expense))
             {
                 throw new Exception($"{nameof(request.Expense)} can't be null or empty");
