@@ -8,5 +8,5 @@ Functionalities:
 
 Technologies used:
 1. .Net 5
-2. Angular 12
+2. Angular 13
 3. Sql Server
