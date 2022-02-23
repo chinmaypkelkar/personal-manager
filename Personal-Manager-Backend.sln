@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal-Manager-Backend", "Personal-Manager-Backend.csproj", "{66DF82C3-E743-4562-9041-0E7A22518072}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal-Manager-Backend", "Personal-Manager-Backend\Personal-Manager-Backend.csproj", "{66DF82C3-E743-4562-9041-0E7A22518072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal-Manager-Backend.Tests", "..\Personal-Manager-Backend.Tests\Personal-Manager-Backend.Tests.csproj", "{AF5147C5-E152-473A-9990-A5B1B8F70B3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Personal-Manager-Backend.Tests", "Personal-Manager-Backend.Tests\Personal-Manager-Backend.Tests.csproj", "{AF5147C5-E152-473A-9990-A5B1B8F70B3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
