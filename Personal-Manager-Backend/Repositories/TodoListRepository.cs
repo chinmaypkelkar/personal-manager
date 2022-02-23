@@ -25,7 +25,7 @@ namespace Personal_Manager_Backend.Repositories
         {
             return await _personalManagerContext.TodoLists
                 .AsNoTracking()
-                .Where(x=> x.CreatedDate == createdDate.Date)
+                .Where(x=> DateTime.Compare(x.CreatedDate.Date, createdDate.Date)  <= 0)
                 .Select(x => x.Name)
                 .ToListAsync();
         }
