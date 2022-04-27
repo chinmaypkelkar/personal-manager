@@ -17,8 +17,8 @@ namespace Personal_Manager_Backend
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var db = services.GetRequiredService<PersonalManagerContext>();
-                    db.Database.Migrate();
+                    /*var db = services.GetRequiredService<PersonalManagerContext>();
+                    db.Database.Migrate();*/
                     host.Run();
                 }
                 catch (Exception ex)

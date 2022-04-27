@@ -3,3 +3,7 @@
   background-color: lightblue;
   min-height: 100vh;
 }
+
+.flexExpand {
+  flex: 1 1 auto;
+}

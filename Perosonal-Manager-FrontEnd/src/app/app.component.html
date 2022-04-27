@@ -1,10 +1,20 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <div>
-      <a mat-button *ngFor="let item of tabs" [routerLink]="item.route">
+    <div *ngIf="token$ | async; else external">
+      <a mat-button *ngFor="let item of internalTabs" [routerLink]="item.route">
         <span>{{item.label}}</span>
       </a>
+      <span class="flexExpand"></span>
+      <a mat-button [routerLink]="'/logout'">
+        <span>Log out</span>
+      </a>
     </div>
+    <ng-template #external>
+      <span class="flexExpand"></span>
+      <a mat-button *ngFor="let item of externalTabs" [routerLink]="item.route">
+        <span>{{item.label}}</span>
+      </a>
+    </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>

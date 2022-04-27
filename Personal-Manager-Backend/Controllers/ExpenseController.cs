@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Personal_Manager_Backend.DataModels;
 using Personal_Manager_Backend.Services;
+using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 
 namespace Personal_Manager_Backend.Controllers
@@ -11,31 +16,36 @@ namespace Personal_Manager_Backend.Controllers
     public class ExpenseController
     {
         private readonly IExpenseService _expenseService;
+        private readonly ICurrentUserService _currentUserService;
 
-        public ExpenseController(IExpenseService expenseService)
+        public ExpenseController(IExpenseService expenseService, ICurrentUserService currentUserService)
         {
             _expenseService = expenseService;
+            _currentUserService = currentUserService;
         }
 
+        [Authorize]
         [HttpPost("[Controller]/[Action]")]
-        public Task<int> Add([FromBody] ExpenseRequest request)
+        public async Task<int> Add([FromBody] ExpenseRequest request)
         {
-            return _expenseService.AddExpense(request);
+            return await _expenseService.AddExpense(request);
         }
         
+        [Authorize]
         [HttpGet("[Controller]/[Action]")]
         public async Task<LimitedResultOfExpenseViewModel> GetLimitedExpenseList([FromQuery] int[] categoryIds, [FromQuery] DateTime startDate, 
             [FromQuery] DateTime endDate, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            var test = await _expenseService.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
-            return test;
+           return await _expenseService.GetLimitedExpenseList(categoryIds, startDate, endDate, pageIndex, pageSize);
         }
         
+        [Authorize]
         [HttpGet("[Controller]/[Action]")]
         public Task<List<ExpenseViewModel>> GetFilteredExpenseList([FromQuery] int[] categoryIds, [FromQuery] DateTime startDate, 
             [FromQuery] DateTime endDate)
         {
             return  _expenseService.GetFilteredExpenseList(categoryIds, startDate, endDate);
         }
+        
     }
 }

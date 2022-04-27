@@ -2,8 +2,9 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using Personal_Manager_Backend.Repositories;
-using Personal_Manager_Backend.Services;
+using Personal_Manager_Backend.Repositories.Interfaces;
+using Personal_Manager_Backend.Services.Classes;
+using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 using Xunit;
 
@@ -17,7 +18,8 @@ namespace Personal_Manager_Backend.Tests
         public ToDoListServiceTests()
         {
             var toDoListRepositoryMock = new Mock<ITodoListRepository>();
-            _todoListService = new TodoListService(toDoListRepositoryMock.Object);
+            var currentUserServiceMock = new Mock<ICurrentUserService>();
+            _todoListService = new TodoListService(toDoListRepositoryMock.Object, currentUserServiceMock.Object);
         }
 
         [Fact]
