@@ -4,7 +4,7 @@
 
 namespace Personal_Manager_Backend.DataModels
 {
-    public class Category
+    public partial class Category
     {
         public Category()
         {
@@ -13,6 +13,7 @@ namespace Personal_Manager_Backend.DataModels
 
         public int Id { get; set; }
         public string Name { get; set; }
+
         public virtual ICollection<Expense> Expenses { get; set; }
     }
 }

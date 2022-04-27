@@ -2,8 +2,9 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using Personal_Manager_Backend.Repositories;
-using Personal_Manager_Backend.Services;
+using Personal_Manager_Backend.Repositories.Interfaces;
+using Personal_Manager_Backend.Services.Classes;
+using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 using Xunit;
 
@@ -16,7 +17,8 @@ namespace Personal_Manager_Backend.Tests
         public ExpenseServiceTests()
         {
             var expenseServiceRepositoryMock = new Mock<IExpenseRepository>();
-            _expenseService = new ExpenseService(expenseServiceRepositoryMock.Object);
+            var currentUserServiceMock = new Mock<ICurrentUserService>();
+            _expenseService = new ExpenseService(expenseServiceRepositoryMock.Object, currentUserServiceMock.Object);
         }
         
         [Fact]

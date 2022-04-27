@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Personal_Manager_Backend.Repositories;
+using Personal_Manager_Backend.Repositories.Interfaces;
+using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 
-namespace Personal_Manager_Backend.Services
+namespace Personal_Manager_Backend.Services.Classes
 {
     public class CategoryService: ICategoryService
     {

@@ -1,12 +1,27 @@
 import {NgModule} from '@angular/core'
 import {Routes, RouterModule} from '@angular/router'
+import {SignInComponent} from "./registration/components/sign-in/sign-in.component";
+import {SignUpComponent} from "./registration/components/sign-up/sign-up.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/add-expense',
+    redirectTo: 'sign-in',
     pathMatch: 'full'
   },
+  {
+    path: 'sign-in',
+    component: SignInComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
+  },
+  {
+    path: 'logout',
+    component: SignInComponent
+  },
+
   {
     path: 'add-expense',
     loadChildren: () => import('./add-expenditure/add-expenditure.module').then(m=>m.AddExpenditureModule)
@@ -23,6 +38,7 @@ const routes: Routes = [
     path: 'view-todo',
     loadChildren: () => import('./view-todo-list/view-todo-list.module').then(m=>m.ViewTodoListModule)
   }
+
 ]
 
 

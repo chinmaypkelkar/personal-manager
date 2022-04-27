@@ -6,6 +6,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ],
   exports:[LoaderComponent, CategoriesComponent],
 })

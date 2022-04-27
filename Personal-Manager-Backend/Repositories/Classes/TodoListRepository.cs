@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Personal_Manager_Backend.DataModels;
+using Personal_Manager_Backend.Repositories.Interfaces;
 
-namespace Personal_Manager_Backend.Repositories
+namespace Personal_Manager_Backend.Repositories.Classes
 {
     public class TodoListRepository: ITodoListRepository
     {
@@ -21,11 +22,11 @@ namespace Personal_Manager_Backend.Repositories
             return await _personalManagerContext.SaveChangesAsync();
         }
 
-        public async Task<List<string>> GetFilteredTodoList(DateTime createdDate)
+        public async Task<List<string>> GetFilteredTodoList(int personId, DateTime createdDate)
         {
             return await _personalManagerContext.TodoLists
                 .AsNoTracking()
-                .Where(x=> DateTime.Compare(x.CreatedDate.Date, createdDate.Date)  <= 0)
+                .Where(x=> DateTime.Compare(x.CreatedDate.Date, createdDate.Date)  <= 0 && x.PersonId == personId)
                 .Select(x => x.Name)
                 .ToListAsync();
         }
