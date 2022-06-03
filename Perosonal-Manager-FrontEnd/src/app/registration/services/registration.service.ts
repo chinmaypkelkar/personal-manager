@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {SignUp} from "../models/signUp";
 import {Observable} from "rxjs";
+import {Token} from "../models/token";
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,10 @@ export class RegistrationService {
     return this.http.post(this.backendBaseUrl + this.signUpUrl, signUpRequest, {headers: this.headers});
   }
 
-  public signIn(userName: string, password: string): Observable<string>{
+  public signIn(userName: string, password: string): Observable<Token>{
     let httpParams = new HttpParams()
       .append('userName', userName)
       .append('password', password)
-    return this.http.get(this.backendBaseUrl + this.signInUrl, {headers: this.headers, params: httpParams, responseType: 'text'})
+    return this.http.get<Token>(this.backendBaseUrl + this.signInUrl, {headers: this.headers, params: httpParams, responseType: 'json'})
   }
 }

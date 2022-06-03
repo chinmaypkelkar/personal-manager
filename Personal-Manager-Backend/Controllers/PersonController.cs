@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Personal_Manager_Backend.Services;
 using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 
@@ -26,10 +25,9 @@ namespace Personal_Manager_Backend.Controllers
 
         [AllowAnonymous]
         [HttpGet("[Controller]/[Action]")]
-        public async Task<string> SignIn([FromQuery] string userName, [FromQuery] string password)
+        public async Task<TokenViewModel> SignIn([FromQuery] string userName, [FromQuery] string password)
         {
-            var test = await _personService.SignIn(userName, password);
-            return test;
+            return await _personService.SignIn(userName, password);
         }
     }
 }

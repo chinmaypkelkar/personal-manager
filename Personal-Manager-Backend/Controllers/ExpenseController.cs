@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Personal_Manager_Backend.DataModels;
-using Personal_Manager_Backend.Services;
 using Personal_Manager_Backend.Services.Interfaces;
 using Personal_Manager_Backend.ViewModels;
 
@@ -46,6 +42,7 @@ namespace Personal_Manager_Backend.Controllers
         {
             return  _expenseService.GetFilteredExpenseList(categoryIds, startDate, endDate);
         }
+        
         
     }
 }

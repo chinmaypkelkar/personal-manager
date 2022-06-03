@@ -7,11 +7,11 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ToastService} from "../../../shared/services/toast.service";
 import {LoadingService} from "../../../shared/services/loading.service";
 import {AuthorizationService} from "../../../shared/services/authorization.service";
+import {Token} from "../../models/token";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
 
@@ -48,9 +48,9 @@ export class SignInComponent implements OnInit {
           setTimeout(() => this.formGroupDirective.resetForm(), 200);
           throw e;
         })
-      ).subscribe((token: string) => {
+      ).subscribe((token: Token) => {
       this._loadingService.setLoader(false);
-      this._authService.setToken(token);
+      this._authService.setToken(token.token);
       this._router.navigate(['add-expense']);
     });
 

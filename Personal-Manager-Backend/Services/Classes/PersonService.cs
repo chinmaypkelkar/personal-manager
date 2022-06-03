@@ -44,7 +44,7 @@ namespace Personal_Manager_Backend.Services.Classes
             await _personRepository.Signup(person);
         }
         
-        public async Task<string> SignIn(string userName, string password)
+        public async Task<TokenViewModel> SignIn(string userName, string password)
         {
             var person = 
                 await _personRepository.GetPerson(userName, password);
@@ -63,8 +63,12 @@ namespace Personal_Manager_Backend.Services.Classes
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var test = tokenHandler.WriteToken(token);
-            return tokenHandler.WriteToken(token);
+            tokenHandler.WriteToken(token);
+            return new TokenViewModel
+            {
+                PersonId = person.PersonId,
+                Token = tokenHandler.WriteToken(token)
+            };
         }
         
         

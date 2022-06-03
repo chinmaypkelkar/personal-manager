@@ -1,1 +1,6 @@
-{}
+{
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:4200",
+  "screenshotsFolder": "output/screenshots",
+  "videosFolder": "output/videos"
+}
